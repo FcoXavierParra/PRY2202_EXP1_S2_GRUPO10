@@ -4,7 +4,7 @@
  */
 package com.mycompany.exp1_s2_grupo10.Models;
 
-public class Cliente {
+public class Cliente implements IMostrable {
     private String rut;
     private String nombre;
     private String apellidoPaterno;

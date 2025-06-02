@@ -10,7 +10,9 @@ import com.mycompany.exp1_s2_grupo10.Models.Cliente;
 import com.mycompany.exp1_s2_grupo10.Models.Cuenta;
 import com.mycompany.exp1_s2_grupo10.Services.ClienteService;
 import com.mycompany.exp1_s2_grupo10.Services.CuentaService;
-
+import com.mycompany.exp1_s2_grupo10.Models.CuentaCorriente;
+import com.mycompany.exp1_s2_grupo10.Models.CuentaAhorro;
+import com.mycompany.exp1_s2_grupo10.Models.CuentaCredito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,18 @@ public class Main {
                     while (true) {
                         System.out.print("Ingrese Rut (formato: 12.345.678-9): ");
                         rut = scanner.nextLine();
-                        Cuenta cuentaDummy = new Cuenta("000000000"); // cuenta temporal para validación
+                       
+                        Cliente existente = clienteService.buscarClientePorRut(clientes, rut);
+
+                        if (existente != null) {
+                            System.out.println("El cliente ya está registrado.");
+                            System.out.print("Tipo de cuenta asociada: ");
+                            existente.getCuenta().mostrarTipoCuenta();
+                            continue; // Salta el registro
+                        }
+
+                        
+                        Cuenta cuentaDummy = new CuentaCorriente("000000000"); // cuenta temporal para validación
                         Cliente temp = new Cliente(rut, "", "", "", "", "", "", cuentaDummy);
                         if (!temp.validarRut()) {
                             System.out.println("El rut ingresado no es válido. Intente nuevamente.");
@@ -64,9 +77,20 @@ public class Main {
                     System.out.print("Ingrese teléfono: ");
                     String fono = scanner.nextLine();
                     System.out.print("Ingrese número de cuenta: ");
-                    String numCuenta = scanner.nextLine();
-
-                    Cuenta cuenta = new Cuenta(numCuenta);
+String numCuenta = scanner.nextLine();
+                    System.out.print("Ingrese Tipo de cuenta (1=Corriente, 2=Ahorro, 3=Crédito): ");
+int tipo = scanner.nextInt(); scanner.nextLine();
+Cuenta cuenta;
+switch (tipo) {
+    case 1 -> cuenta = new CuentaCorriente(numCuenta);
+    case 2 -> cuenta = new CuentaAhorro(numCuenta);
+    case 3 -> cuenta = new CuentaCredito(numCuenta);
+    default -> {
+        System.out.println("Tipo no válido. Se asignará cuenta corriente por defecto.");
+        cuenta = new CuentaCorriente(numCuenta);
+    }
+}
+            
                     Cliente cliente = new Cliente(rut, nombre, apPat, apMat, dom, comuna, fono, cuenta);
                     clientes.add(cliente);
                     System.out.println("Cliente registrado exitosamente.");

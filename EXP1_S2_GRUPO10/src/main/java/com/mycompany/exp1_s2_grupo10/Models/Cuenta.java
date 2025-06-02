@@ -6,7 +6,7 @@ package com.mycompany.exp1_s2_grupo10.Models;
 
 /*@author bclaros y fparraa*/
 
-public class Cuenta {
+public abstract class Cuenta {
     private String numero;
     private int saldo;
 
@@ -48,4 +48,6 @@ public class Cuenta {
     public int getSaldo() {
         return saldo;
     }
+    public abstract void mostrarTipoCuenta();
 }
+
