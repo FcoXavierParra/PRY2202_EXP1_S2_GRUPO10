@@ -19,19 +19,19 @@ Polimorfismo dinámico al operar sobre referencias del tipo Cuenta que pueden ap
 Atributos privados con métodos get y set para proteger el estado interno de los objetos (Cliente, Cuenta).
 
 🏗️ Estructura del Proyecto
-└── Main.java                 // Punto de entrada de la aplicación
+--> Main.java                 // Punto de entrada de la aplicación
 Models
-├── Cliente.java              // Clase con atributos personales y métodos de acceso
-├── Cuenta.java               // Clase abstracta con métodos comunes de cuenta
-├── CuentaAhorro.java         // Subclase que implementa intereses y límites de retiro
-├── CuentaCorriente.java      // Subclase con gestión de sobregiro
-├── CuentaCredito.java        // Subclase con lógica de deuda y pago
-├── IMostrable.java           // Interfaz para mostrar información
+--> Cliente.java              // Clase con atributos personales y métodos de acceso
+--> Cuenta.java               // Clase abstracta con métodos comunes de cuenta
+--> CuentaAhorro.java         // Subclase que implementa intereses y límites de retiro
+--> CuentaCorriente.java      // Subclase con gestión de sobregiro
+--> CuentaCredito.java        // Subclase con lógica de deuda y pago
+--> IMostrable.java           // Interfaz para mostrar información
 Services
-├── ClienteService.java       // Lógica de negocio relacionada a clientes
-├── CuentaService.java        // Operaciones sobre cuentas (alta, baja, movimientos)
+--> ClienteService.java       // Lógica de negocio relacionada a clientes
+--> CuentaService.java        // Operaciones sobre cuentas (alta, baja, movimientos)
 Views
-├── Menu.java                 // Menú de interacción por consola
+--> Menu.java                 // Menú de interacción por consola
 
 ✨ Funcionalidades Clave
 Crear y obtener datos Clientes
