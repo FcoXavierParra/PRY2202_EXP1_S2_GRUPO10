@@ -26,9 +26,19 @@ public class Cliente implements IMostrable {
         this.cuenta = cuenta;
     }
 
-    public boolean validarRut() {
-        String rutSinFormato = rut.replace(".", "").replace("-", "");
-        return rutSinFormato.length() >= 8 && rutSinFormato.length() <= 9;
+    public static boolean validarRut(String rut) {
+        rut = rut.replace(".", "").replace("-", "").toUpperCase();
+        if (!rut.matches("\\d{7,8}[0-9K]")) return false;
+
+        int suma = 0, factor = 2;
+        for (int i = rut.length() - 2; i >= 0; i--) {
+            suma += Character.getNumericValue(rut.charAt(i)) * factor;
+            factor = factor == 7 ? 2 : factor + 1;
+        }
+        int dvEsperado = 11 - (suma % 11);
+        char dv = rut.charAt(rut.length() - 1);
+        String dvCalculado = dvEsperado == 11 ? "0" : dvEsperado == 10 ? "K" : String.valueOf(dvEsperado);
+        return dvCalculado.equals(String.valueOf(dv));
     }
 
     public void mostrarDatos() {
@@ -39,14 +49,12 @@ public class Cliente implements IMostrable {
         System.out.println("Domicilio: " + domicilio);
         System.out.println("Comuna: " + comuna);
         System.out.println("Teléfono: " + telefono);
+        System.out.println("Teléfono: " + telefono);
+        cuenta.mostrarTipoCuenta();
+        System.out.println("Número de cuenta: " + cuenta.getNumero());
         cuenta.mostrarSaldo();
-    }
+        }
 
-    public String getRut() {
-        return rut;
-    }
-
-    public Cuenta getCuenta() {
-        return cuenta;
-    }
+    public String getRut() { return rut; }
+    public Cuenta getCuenta() { return cuenta; }
 }
